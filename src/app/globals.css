@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 2, 6, 23;
+  --background-end-rgb: 15, 23, 42;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      135deg,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    )
+    no-repeat fixed;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6);
+}
+
+/* Code editor container */
+.editor-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: #1e1e2e;
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #8b5cf6,
+    #a78bfa,
+    #6366f1
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.5;
+  animation: borderRotate 4s linear infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glowing effect */
+.glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15),
+    0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+.glow-strong {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3),
+    0 0 60px rgba(99, 102, 241, 0.15);
+}
+
+/* Step connector line animation */
+@keyframes lineGrow {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+.step-line-animate {
+  animation: lineGrow 0.5s ease-out forwards;
+}
+
+/* Loading dots */
+@keyframes loadingDots {
+  0%, 20% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.loading-dot:nth-child(1) { animation: loadingDots 1.4s infinite 0s; }
+.loading-dot:nth-child(2) { animation: loadingDots 1.4s infinite 0.2s; }
+.loading-dot:nth-child(3) { animation: loadingDots 1.4s infinite 0.4s; }
+
+/* Toast styles */
+.toast-custom {
+  background: #1e293b !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+}
