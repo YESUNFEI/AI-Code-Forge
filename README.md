@@ -4,7 +4,7 @@ AI Code Forge 是一个基于 AI 的智能 API 代码生成器 Web 应用。用�
 
 ## 演示
 
-https://github.com/user-attachments/assets/example.mp4
+[点击播放示例视频](example.mp4)
 
 ## 核心功能
 
