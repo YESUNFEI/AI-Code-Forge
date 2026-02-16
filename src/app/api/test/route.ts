@@ -27,11 +27,18 @@ export async function POST(request: NextRequest) {
     );
 
     const parsed = safeParseJSON(result.tests);
+    const tests = (parsed.tests as TestResult["tests"]) || [];
+    const errors = (parsed.errors as string[]) || [];
+
+    // Derive success from actual test results instead of trusting the LLM's field
+    const allTestsPassed = tests.length > 0 && tests.every((t) => t.status === "pass");
+    const hasNoErrors = errors.length === 0;
+
     const testResult: TestResult = {
-      success: !!parsed.success,
-      tests: (parsed.tests as TestResult["tests"]) || [],
-      summary: (parsed.summary as string) || "Failed to parse test results",
-      errors: (parsed.errors as string[]) || [],
+      success: allTestsPassed && hasNoErrors,
+      tests,
+      summary: (parsed.summary as string) || "No summary",
+      errors,
     };
 
     return NextResponse.json(testResult);
