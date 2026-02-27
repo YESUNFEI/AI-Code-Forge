@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Sparkles,
   ChevronDown,
@@ -37,6 +37,11 @@ export default function RequirementInput({
   const [language, setLanguage] = useState<Language>("typescript");
   const [showLanguages, setShowLanguages] = useState(false);
   const [showExamples, setShowExamples] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(navigator.platform?.includes("Mac"));
+  }, []);
 
   const selectedLang = LANGUAGES.find((l) => l.value === language)!;
 
@@ -105,7 +110,7 @@ export default function RequirementInput({
         />
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
           <span className="text-[10px] text-dark-500">
-            {navigator?.platform?.includes("Mac") ? "⌘" : "Ctrl"} + Enter
+            {isMac ? "⌘" : "Ctrl"} + Enter
           </span>
           <button
             onClick={handleSubmit}

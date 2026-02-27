@@ -45,14 +45,15 @@ export function getOpenAIClient(): OpenAI {
     openaiClient = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
       baseURL: process.env.OPENAI_BASE_URL || "https://api.openai.com/v1",
+      timeout: 60_000,
       ...(proxyUrl ? { httpAgent: new HttpsProxyAgent(proxyUrl) } : {}),
     });
   }
   return openaiClient;
 }
 
-const MAX_RETRIES = 5;
-const BASE_DELAY_MS = 15000;
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 2000;
 
 async function chatWithRetry(
   client: OpenAI,
